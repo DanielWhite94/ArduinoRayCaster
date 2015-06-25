@@ -1,8 +1,13 @@
 #ifndef ESPLORA_H
 #define ESPLORA_H
 
+#include <SDL2/SDL.h>
+
 class esploraTft {
 public:
+	esploraTft();
+	~esploraTft();
+
 	void begin(void);
 
 	void background(int r, int g, int b);
@@ -23,6 +28,17 @@ public:
 
 	void text(const char *str, int x, int y);
 	void setTextSize(int size); // 1<=size<=5.
+private:
+	bool strokeDo;
+	int strokeR, strokeG, strokeB;
+
+	bool fillDo;
+	int fillR, fillG, fillB;
+
+	SDL_Window *window;
+	SDL_Renderer *renderer;
+
+	void refresh(void);
 };
 class esploraTft EsploraTFT;
 
