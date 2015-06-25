@@ -38,6 +38,7 @@ namespace RayCast {
 		void fill(const Colour &colour); // Set fill colour of shapes and text.
 		void noFill(void);
 
+		void point(unsigned x, unsigned y);
 		void line(unsigned x1, unsigned y1, unsigned x2, unsigned y2);
 		void rect(unsigned x, unsigned y, unsigned w, unsigned h);
 	private:

@@ -131,6 +131,14 @@ namespace RayCast {
 #		endif
 	}
 
+	void Graphics::point(unsigned x, unsigned y) {
+#		if RAYCAST_GRAPHICS_MODE == RAYCAST_GRAPHICS_MODE_SDL
+			SDL_RenderDrawPoint(renderer, (int)x, (int)y);
+#		else
+			assert(false);
+#		endif
+	}
+
 	void Graphics::line(unsigned x1, unsigned y1, unsigned x2, unsigned y2) {
 #		if RAYCAST_GRAPHICS_MODE == RAYCAST_GRAPHICS_MODE_SDL
 			SDL_RenderDrawLine(renderer, (int)x1, (int)y1, (int)x2, (int)y2);
