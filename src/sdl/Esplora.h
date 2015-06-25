@@ -104,6 +104,6 @@ public:
 	void noTone(int pin);
 };
 
-esplora Esplora;
+extern esplora Esplora;
 
 #endif

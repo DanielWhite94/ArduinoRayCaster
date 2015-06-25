@@ -5,6 +5,7 @@
 #include "Esplora.h"
 
 esploraTft EsploraTFT;
+esplora Esplora;
 
 esploraTft::esploraTft() {
 	strokeDo=false;
