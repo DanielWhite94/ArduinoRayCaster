@@ -153,3 +153,76 @@ void esploraTft::setTextSize(int size) {
 void esploraTft::refresh(void) {
 	SDL_RenderPresent(renderer);
 }
+
+
+int esplora::readSlider(){
+	//TODO
+	return 0;
+}
+int readLightSensor(){
+	//TODO
+	return 0;
+}
+int readTemperature(TemperatureScale scale){
+	//TODO
+	return 0;
+}
+int readMicrophone(){
+	//TODO
+	return 0;
+}
+int readJoystickSwitch(){
+	//TODO
+	return 0;
+}
+int readAccelerometer(Axis axis){
+	//TODO
+	return 0;
+}
+DigitalOutput readButton(Button b){
+	//TODO
+	return LOW;
+}
+int readJoystickX(){
+	//TODO
+	return 0;
+}
+int readJoystickY(){
+	//TODO
+	return 0;
+}
+void writeRGB(int red, int green, int blue){
+	//TODO
+}
+void writeRed(int brightness){
+	//TODO
+}
+void writeGreen(int brightness){
+	//TODO
+}
+void writeBlue(int brightness){
+	//TODO
+}
+int readRed(){
+	//TODO
+	return 0;
+}
+int readGreen(){
+	//TODO
+	return 0;
+}
+int readBlue(){
+	//TODO
+	return 0;
+}
+void tone(int pin, unsigned int frequency, unsigned long duration){
+	//TODO
+}
+// A call to tone without a duration keeps the buzzer
+// going until noTone is called
+void tone(int pin, unsigned int frequency){
+	//TODO
+}
+void noTone(int pin){
+	//TODO
+}
