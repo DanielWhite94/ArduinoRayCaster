@@ -4,6 +4,8 @@
 
 #include "Esplora.h"
 
+esploraTft EsploraTFT;
+
 esploraTft::esploraTft() {
 	strokeDo=false;
 	fillDo=false;

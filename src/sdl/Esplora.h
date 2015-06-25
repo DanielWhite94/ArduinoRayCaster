@@ -40,6 +40,6 @@ private:
 
 	void refresh(void);
 };
-class esploraTft EsploraTFT;
+extern esploraTft EsploraTFT;
 
 #endif
