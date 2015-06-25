@@ -131,4 +131,34 @@ namespace RayCast {
 #		endif
 	}
 
+	void Graphics::line(unsigned x1, unsigned y1, unsigned x2, unsigned y2) {
+#		if RAYCAST_GRAPHICS_MODE == RAYCAST_GRAPHICS_MODE_SDL
+			SDL_RenderDrawLine(renderer, (int)x1, (int)y1, (int)x2, (int)y2);
+#		else
+			assert(false);
+#		endif
+	}
+
+	void Graphics::rect(unsigned x, unsigned y, unsigned w, unsigned h) {
+#		if RAYCAST_GRAPHICS_MODE == RAYCAST_GRAPHICS_MODE_SDL
+		// Draw rectangle.
+		if (fillDo) {
+			SDL_SetRenderDrawColor(renderer, fillColour.r, fillColour.g, fillColour.b, 0xFF);
+			SDL_Rect rect={(int)x, (int)y, (int)w, (int)h};
+			SDL_RenderFillRect(renderer, &rect);
+			SDL_SetRenderDrawColor(renderer, strokeColour.r, strokeColour.g, strokeColour.b, 0xFF); // Reset colour.
+		}
+
+		// Draw outline:
+		if (strokeDo) {
+			this->line(x, y, x+w, y); // Top,
+			this->line(x+w-1, y, x+w-1, y+h); // right,
+			this->line(x, y+h-1, x+w, y+h-1); // bottom and
+			this->line(x, y, x, y+h); // left.
+		}
+#		else
+			assert(false);
+#		endif
+	}
+
 };
