@@ -24,6 +24,9 @@ public:
 	void text(const char *str, int x, int y);
 	void setTextSize(int size); // 1<=size<=5.
 };
-class esploraTft EsploraTFT;
+
+// Global EsploraTFT variable to emulate the esplora library
+esploraTft EsploraTFT;
+
 
 #endif
