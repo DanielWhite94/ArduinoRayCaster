@@ -12,14 +12,20 @@ namespace RayCast {
 	}
 
 	void Renderer::render(const ViewPoint &vPoint) {
+		int screenW=graphics->getWidth();
+		int screenH=graphics->getHeight();
+
 		// Clear surface.
 		graphics->clear(Colour(255, 0, 255)); // Clear screen (to pink, to help identify any undrawn regions).
 
-		// Draw skybox.
-		// TODO: this
+		// Draw sky and ground.
+		graphics->noStroke();
 
-		// Draw ground.
-		// TODO: this
+		graphics->fill(Colour(0,0,255));
+		graphics->rect(0, 0, screenW, screenH/2);
+
+		graphics->fill(Colour(0,255,0));
+		graphics->rect(0, screenH/2, screenW, screenH/2);
 
 		// Draw blocks.
 		// TODO: this
