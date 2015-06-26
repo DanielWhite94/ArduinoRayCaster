@@ -168,6 +168,15 @@ void esploraTft::setTextSize(int size) {
 }
 
 void esploraTft::refresh(void) {
+	// Check events.
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+		switch(event.type) {
+			case SDL_QUIT:
+				exit(EXIT_SUCCESS);
+			break;
+		}
+
 	// Reset rendering back to the screen
 	SDL_SetRenderTarget(renderer, NULL);
 
