@@ -1,18 +1,4 @@
-CPP = clang++
-
-CFLAGS = -Wall -std=c++11 -O2 -I sdl
-LFLAGS = -lSDL2 -lm -lSDL2_gfx
-
-OBJS = sdl/Esplora.o main.o renderer.o viewpoint.o
-
-ALL: $(OBJS)
-	$(CPP) $(CFLAGS) $(LFLAGS) $(OBJS) -o main
-
-%.o: %.cpp %.h
-	$(CPP) $(CFLAGS) -c -o $@ $<
-
-%.o: %.cpp
-	$(CPP) $(CFLAGS) -c -o $@ $<
-
+all:
+	cd Games && make
 clean:
-	rm -f $(OBJS)
+	cd Games && make clean

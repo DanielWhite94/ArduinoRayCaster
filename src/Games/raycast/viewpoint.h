@@ -9,7 +9,7 @@ namespace RayCast {
 	public:
 		ViewPoint(float X, float Y, float Angle, float Fov=M_PI/3.0, float MaxDist=64.0);
 
-		float getX(void) const ;
+		float getX(void) const ; 
 		float getY(void) const ;
 		float getAngle(void) const ;
 		float getFov(void) const ;
