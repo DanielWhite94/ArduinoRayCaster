@@ -30,6 +30,11 @@ esploraTft::esploraTft() {
 		printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
+	
+	// Create another texture for the TFT library to write onto
+	screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB24, SDL_TEXTUREACCESS_TARGET, 640, 480);
+	SDL_SetRenderTarget(renderer, screenTexture);
+
 }
 
 esploraTft::~esploraTft() {
@@ -152,7 +157,11 @@ void esploraTft::setTextSize(int size) {
 }
 
 void esploraTft::refresh(void) {
+	// Reset rendering back to the screen
+	SDL_SetRenderTarget(renderer, NULL);
+	SDL_RenderCopy(renderer, screenTexture, NULL, NULL);
 	SDL_RenderPresent(renderer);
+	SDL_SetRenderTarget(renderer, screenTexture);
 }
 
 

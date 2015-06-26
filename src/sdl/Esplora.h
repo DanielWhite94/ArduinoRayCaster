@@ -37,6 +37,7 @@ private:
 
 	SDL_Window *window;
 	SDL_Renderer *renderer;
+	SDL_Texture *screenTexture;
 
 	void refresh(void);
 };
@@ -105,6 +106,7 @@ public:
 
 private:
 	const Uint8 *getKeyboardState();
+
 };
 
 extern esplora Esplora;
