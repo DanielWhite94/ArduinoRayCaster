@@ -3,6 +3,9 @@
 
 #include <SDL2/SDL.h>
 
+void delay(unsigned long ms);
+unsigned long millis(void);
+
 class esploraTft {
 public:
 

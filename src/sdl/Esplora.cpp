@@ -7,6 +7,14 @@
 esploraTft EsploraTFT;
 esplora Esplora;
 
+void delay(unsigned long ms) {
+	SDL_Delay(ms);
+}
+
+unsigned long millis(void) {
+	return SDL_GetTicks();
+}
+
 esploraTft::esploraTft() {
 	strokeDo=false;
 	fillDo=false;
