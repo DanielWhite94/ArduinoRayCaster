@@ -102,6 +102,9 @@ public:
 	// going until noTone is called
 	void tone(int pin, unsigned int frequency); 
 	void noTone(int pin);
+
+private:
+	const Uint8 *getKeyboardState();
 };
 
 extern esplora Esplora;

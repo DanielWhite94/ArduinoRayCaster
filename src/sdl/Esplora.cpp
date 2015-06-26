@@ -160,70 +160,108 @@ int esplora::readSlider(){
 	//TODO
 	return 0;
 }
-int readLightSensor(){
+int esplora::readLightSensor(){
 	//TODO
 	return 0;
 }
-int readTemperature(TemperatureScale scale){
+int esplora::readTemperature(TemperatureScale scale){
 	//TODO
 	return 0;
 }
-int readMicrophone(){
+int esplora::readMicrophone(){
 	//TODO
 	return 0;
 }
-int readJoystickSwitch(){
+int esplora::readJoystickSwitch(){
 	//TODO
 	return 0;
 }
-int readAccelerometer(Axis axis){
+int esplora::readAccelerometer(Axis axis){
 	//TODO
 	return 0;
 }
-DigitalOutput readButton(Button b){
-	//TODO
-	return LOW;
+DigitalOutput esplora::readButton(Button b){
+	const Uint8 *keys = getKeyboardState();
+
+	switch(b) {
+		case SWITCH_1:
+		case SWITCH_DOWN:
+			if(keys[SDL_SCANCODE_DOWN])
+				return HIGH;
+			else
+				return LOW;
+		break;	
+		case SWITCH_LEFT:
+		case SWITCH_2:
+			if(keys[SDL_SCANCODE_LEFT])
+				return HIGH;
+			else
+				return LOW;
+		break;
+		case SWITCH_UP:
+		case SWITCH_3:
+			if(keys[SDL_SCANCODE_UP])
+				return HIGH;
+			else
+				return LOW;
+		break;
+		case SWITCH_RIGHT:
+		case SWITCH_4:
+			if(keys[SDL_SCANCODE_RIGHT])
+				return HIGH;
+			else
+				return LOW;
+		break;
+
+		default:
+			return LOW;
+		break;
+	}
 }
-int readJoystickX(){
+int esplora::readJoystickX(){
 	//TODO
 	return 0;
 }
-int readJoystickY(){
+int esplora::readJoystickY(){
 	//TODO
 	return 0;
 }
-void writeRGB(int red, int green, int blue){
+void esplora::writeRGB(int red, int green, int blue){
 	//TODO
 }
-void writeRed(int brightness){
+void esplora::writeRed(int brightness){
 	//TODO
 }
-void writeGreen(int brightness){
+void esplora::writeGreen(int brightness){
 	//TODO
 }
-void writeBlue(int brightness){
+void esplora::writeBlue(int brightness){
 	//TODO
 }
-int readRed(){
-	//TODO
-	return 0;
-}
-int readGreen(){
+int esplora::readRed(){
 	//TODO
 	return 0;
 }
-int readBlue(){
+int esplora::readGreen(){
 	//TODO
 	return 0;
 }
-void tone(int pin, unsigned int frequency, unsigned long duration){
+int esplora::readBlue(){
+	//TODO
+	return 0;
+}
+void esplora::tone(int pin, unsigned int frequency, unsigned long duration){
 	//TODO
 }
 // A call to tone without a duration keeps the buzzer
 // going until noTone is called
-void tone(int pin, unsigned int frequency){
+void esplora::tone(int pin, unsigned int frequency){
 	//TODO
 }
-void noTone(int pin){
+void esplora::noTone(int pin){
 	//TODO
+}
+
+const Uint8 *esplora::getKeyboardState(){
+	return SDL_GetKeyboardState(NULL);
 }
