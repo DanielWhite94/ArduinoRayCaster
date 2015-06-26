@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
 	while(1) {
 		ViewPoint vPoint(0, 0, 0);
 		renderer->render(vPoint);
-		sleep(1);
+		delay(100);
 	}
 
 	delete renderer;
