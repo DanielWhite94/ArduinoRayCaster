@@ -263,5 +263,7 @@ void esplora::noTone(int pin){
 }
 
 const Uint8 *esplora::getKeyboardState(){
+	// Refresh SDL internals
+	SDL_PumpEvents();
 	return SDL_GetKeyboardState(NULL);
 }
