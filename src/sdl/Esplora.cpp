@@ -20,7 +20,8 @@ esploraTft::esploraTft() {
 		printf("Warning: Linear texture filtering not enabled!");
 		exit(EXIT_FAILURE);
 	}
-	window=SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN);
+	window=SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 
+		WINDOWWIDTH, WINDOWHEIGHT, SDL_WINDOW_SHOWN);
 	if(window==NULL) {
 		printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
@@ -32,7 +33,9 @@ esploraTft::esploraTft() {
 	}
 	
 	// Create another texture for the TFT library to write onto
-	screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB24, SDL_TEXTUREACCESS_TARGET, 640, 480);
+	// TODO: Check for NULL
+	screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB24, SDL_TEXTUREACCESS_TARGET, 
+		TFTWIDTH, TFTHEIGHT);
 	SDL_SetRenderTarget(renderer, screenTexture);
 
 }
@@ -159,7 +162,14 @@ void esploraTft::setTextSize(int size) {
 void esploraTft::refresh(void) {
 	// Reset rendering back to the screen
 	SDL_SetRenderTarget(renderer, NULL);
-	SDL_RenderCopy(renderer, screenTexture, NULL, NULL);
+
+	SDL_Rect r = {
+		TFTPOSX, TFTPOSY, 
+		(int)(ZOOM*TFTWIDTH), 
+		(int)(ZOOM*TFTHEIGHT)
+	};
+
+	SDL_RenderCopy(renderer, screenTexture, NULL, &r);
 	SDL_RenderPresent(renderer);
 	SDL_SetRenderTarget(renderer, screenTexture);
 }

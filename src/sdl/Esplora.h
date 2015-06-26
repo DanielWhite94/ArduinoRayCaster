@@ -5,6 +5,17 @@
 
 class esploraTft {
 public:
+
+	const int TFTWIDTH = 200;
+	const int TFTHEIGHT = 130;
+	const int WINDOWWIDTH = 700;
+	const int WINDOWHEIGHT = 500;
+
+	const float ZOOM = 2.5;
+
+	const int TFTPOSX = WINDOWWIDTH / 2 - ZOOM*TFTWIDTH / 2;
+	const int TFTPOSY = WINDOWHEIGHT / 2 -ZOOM*TFTHEIGHT / 2;
+
 	esploraTft();
 	~esploraTft();
 
@@ -28,6 +39,7 @@ public:
 
 	void text(const char *str, int x, int y);
 	void setTextSize(int size); // 1<=size<=5.
+
 private:
 	bool strokeDo;
 	int strokeR, strokeG, strokeB;
