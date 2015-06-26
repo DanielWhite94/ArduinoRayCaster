@@ -19,6 +19,11 @@ esploraTft::esploraTft() {
 	strokeDo=false;
 	fillDo=false;
 
+	// TODO: Make getter/setter
+	LEDR = 255;
+	LEDG = 0;
+	LEDB = 0;
+
 	// TODO: Throw exceptions instead?
 	if(SDL_Init(SDL_INIT_VIDEO)<0) {
 		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
@@ -187,8 +192,18 @@ void esploraTft::refresh(void) {
 	};
 
 	SDL_RenderCopy(renderer, screenTexture, NULL, &r);
+
+	//draw the LED while the renderer is still outputting to the window
+	this->drawLED();
+
+
 	SDL_RenderPresent(renderer);
 	SDL_SetRenderTarget(renderer, screenTexture);
+}
+
+void esploraTft::drawLED(void) {
+	filledCircleRGBA(renderer, LEDX, LEDY, LEDRADIUS, 
+		LEDR, LEDG, LEDB, 255);
 }
 
 
