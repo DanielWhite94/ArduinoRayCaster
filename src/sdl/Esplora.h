@@ -2,6 +2,7 @@
 #define ESPLORA_H
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL2_gfxPrimitives.h>
 
 void delay(unsigned long ms);
 unsigned long millis(void);
@@ -18,6 +19,10 @@ public:
 
 	const int TFTPOSX = WINDOWWIDTH / 2 - ZOOM*TFTWIDTH / 2;
 	const int TFTPOSY = WINDOWHEIGHT / 2 -ZOOM*TFTHEIGHT / 2;
+
+	const int LEDX = 650;
+	const int LEDY = 450;
+	const int LEDRADIUS = 10;
 
 	esploraTft();
 	~esploraTft();
@@ -54,7 +59,10 @@ private:
 	SDL_Renderer *renderer;
 	SDL_Texture *screenTexture;
 
+	int LEDR, LEDG, LEDB;
+
 	void refresh(void);
+	void drawLED(void);
 };
 
 // Global EsploraTFT variable to emulate the esplora library
