@@ -30,4 +30,7 @@ namespace RayCast {
 		return maxDist;
 	}
 
+	void ViewPoint::setAngle(float newAngle) {
+		angle=newAngle;
+	}
 };

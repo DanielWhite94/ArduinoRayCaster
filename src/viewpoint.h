@@ -14,6 +14,8 @@ namespace RayCast {
 		float getAngle(void) const ;
 		float getFov(void) const ;
 		float getMaxDist(void) const ;
+
+		void setAngle(float newAngle);
 	private:
 		float x, y;
 		float angle;
