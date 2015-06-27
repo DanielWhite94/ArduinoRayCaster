@@ -47,22 +47,33 @@ esploraTft::esploraTft() {
 	
 	// Create another texture for the TFT library to write onto
 	// TODO: Check for NULL
-	screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB24, SDL_TEXTUREACCESS_TARGET, 
+	tftTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB24, SDL_TEXTUREACCESS_TARGET,
 		TFTWIDTH, TFTHEIGHT);
-	SDL_SetRenderTarget(renderer, screenTexture);
+	SDL_SetRenderTarget(renderer, tftTexture);
 
 }
 
 esploraTft::~esploraTft() {
+    SDL_DestroyTexture(tftTexture);
+	tftTexture=NULL;
 	SDL_DestroyRenderer(renderer);
+	renderer=NULL;
 	SDL_DestroyWindow(window);
 	window=NULL;
-	renderer=NULL;
 
 	SDL_Quit();
 }
 
 void esploraTft::begin(void) {
+	tick();
+}
+
+void esploraTft::tick(void) {
+	// Check for events.
+	checkEvents();
+
+	// Draw and update screen.
+	redraw();
 }
 
 void esploraTft::background(int r, int g, int b) {
@@ -73,8 +84,6 @@ void esploraTft::background(int r, int g, int b) {
 	SDL_SetRenderDrawColor(renderer, r, g, b, 0xFF);
 	SDL_Rect rect={0, 0, this->width(), this->height()};
 	SDL_RenderFillRect(renderer, &rect);
-
-	this->refresh();
 }
 
 void esploraTft::stroke(int r, int g, int b) {
@@ -113,8 +122,6 @@ void esploraTft::point(int x, int y) {
 
 	SDL_SetRenderDrawColor(renderer, strokeR, strokeG, strokeB, 0xFF);
 	SDL_RenderDrawPoint(renderer, x, y);
-
-	this->refresh();
 }
 
 void esploraTft::line(int x1, int y1, int x2, int y2) {
@@ -123,8 +130,6 @@ void esploraTft::line(int x1, int y1, int x2, int y2) {
 
 	SDL_SetRenderDrawColor(renderer, strokeR, strokeG, strokeB, 0xFF);
 	SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
-
-	this->refresh();
 }
 
 void esploraTft::rect(int x, int y, int w, int h) {
@@ -143,9 +148,6 @@ void esploraTft::rect(int x, int y, int w, int h) {
 		this->line(x, y+h-1, x+w, y+h-1); // bottom and
 		this->line(x, y, x, y+h); // left.
 	}
-
-	if (fillDo || strokeDo)
-		this->refresh();
 }
 
 void esploraTft::circle(int x, int y, int radius) {
@@ -168,7 +170,7 @@ void esploraTft::setTextSize(int size) {
 	// TODO: this
 }
 
-void esploraTft::refresh(void) {
+void esploraTft::checkEvents(void) {
 	// Check events.
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
@@ -177,27 +179,31 @@ void esploraTft::refresh(void) {
 				exit(EXIT_SUCCESS);
 			break;
 		}
+}
 
+void esploraTft::redraw(void) {
 	// Reset rendering back to the screen
 	SDL_SetRenderTarget(renderer, NULL);
 
+	// Copy TFT texture.
 	SDL_Rect r = {
 		TFTPOSX, TFTPOSY, 
 		(int)(ZOOM*TFTWIDTH), 
 		(int)(ZOOM*TFTHEIGHT)
 	};
+	SDL_RenderCopy(renderer, tftTexture, NULL, &r);
 
-	SDL_RenderCopy(renderer, screenTexture, NULL, &r);
+	// Draw the Led.
+	this->drawLed();
 
-	//draw the LED while the renderer is still outputting to the window
-	this->drawLED();
-
-
+	// Update the screen.
 	SDL_RenderPresent(renderer);
-	SDL_SetRenderTarget(renderer, screenTexture);
+
+	// Set rendering to tft texture once again.
+	SDL_SetRenderTarget(renderer, tftTexture);
 }
 
-void esploraTft::drawLED(void) {
+void esploraTft::drawLed(void) {
 	filledCircleRGBA(renderer, LEDX, LEDY, LEDRADIUS, LedR, LedG, LedB, 255);
 }
 

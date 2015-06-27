@@ -9,7 +9,6 @@ unsigned long millis(void);
 
 class esploraTft {
 public:
-
 	const int TFTWIDTH = 200;
 	const int TFTHEIGHT = 130;
 	const int WINDOWWIDTH = 700;
@@ -28,6 +27,8 @@ public:
 	~esploraTft();
 
 	void begin(void);
+
+	void tick(); // Call things such as redraw().
 
 	void background(int r, int g, int b);
 
@@ -57,12 +58,15 @@ private:
 
 	SDL_Window *window;
 	SDL_Renderer *renderer;
-	SDL_Texture *screenTexture;
+	SDL_Texture *tftTexture;
 
 	int LedR, LedG, LedB;
 
-	void refresh(void);
-	void drawLED(void);
+	void checkEvents(void);
+
+	void redraw(void); // Draw and update screen.
+
+	void drawLed(void);
 };
 
 // Global EsploraTFT variable to emulate the esplora library
