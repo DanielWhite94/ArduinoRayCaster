@@ -20,9 +20,9 @@ esploraTft::esploraTft() {
 	fillDo=false;
 
 	// TODO: Make getter/setter
-	LEDR = 255;
-	LEDG = 0;
-	LEDB = 0;
+	LedR = 255;
+	LedG = 0;
+	LedB = 0;
 
 	// TODO: Throw exceptions instead?
 	if(SDL_Init(SDL_INIT_VIDEO)<0) {
@@ -202,8 +202,7 @@ void esploraTft::refresh(void) {
 }
 
 void esploraTft::drawLED(void) {
-	filledCircleRGBA(renderer, LEDX, LEDY, LEDRADIUS, 
-		LEDR, LEDG, LEDB, 255);
+	filledCircleRGBA(renderer, LEDX, LEDY, LEDRADIUS, LedR, LedG, LedB, 255);
 }
 
 

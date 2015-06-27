@@ -59,7 +59,7 @@ private:
 	SDL_Renderer *renderer;
 	SDL_Texture *screenTexture;
 
-	int LEDR, LEDG, LEDB;
+	int LedR, LedG, LedB;
 
 	void refresh(void);
 	void drawLED(void);
