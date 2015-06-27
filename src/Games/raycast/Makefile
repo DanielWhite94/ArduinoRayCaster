@@ -8,6 +8,9 @@ OBJS = ../../sdl/Esplora.o main.o renderer.o viewpoint.o
 ALL: $(OBJS)
 	$(CPP) $(CFLAGS) $(LFLAGS) $(OBJS) -o main
 
+extra:
+	make CFLAGS="$(CFLAGS) -DEXTRA"
+
 %.o: %.cpp %.h
 	$(CPP) $(CFLAGS) -c -o $@ $<
 
