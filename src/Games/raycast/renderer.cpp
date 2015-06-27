@@ -33,4 +33,17 @@ namespace RayCast {
 		// TODO: this
 	}
 
+#ifdef EXTRA
+	void Renderer::renderTopDown(const ViewPoint &vPoint) {
+		const int cellW=16;
+		const int cellH=16;
+
+		int screenW=EsploraTFT.width();
+		int screenH=EsploraTFT.height();
+
+		// Clear screen.
+		EsploraTFT.background(0, 0, 0);
+	}
+#endif
+
 };

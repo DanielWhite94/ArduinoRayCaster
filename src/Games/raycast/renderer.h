@@ -13,6 +13,10 @@ namespace RayCast {
 
 		void render(const ViewPoint &vPoint);
 
+#ifdef EXTRA
+		void renderTopDown(const ViewPoint &vPoint);
+#endif
+
 	private:
 	};
 };
