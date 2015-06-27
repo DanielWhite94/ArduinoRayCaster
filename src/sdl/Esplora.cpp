@@ -153,15 +153,11 @@ void esploraTft::circle(int x, int y, int radius) {
 }
 
 int esploraTft::width(void) {
-	int w=0, h=0;
-	SDL_GetRendererOutputSize(renderer, &w, &h);
-	return w;
+	return TFTWIDTH;
 }
 
 int esploraTft::height(void) {
-	int w=0, h=0;
-	SDL_GetRendererOutputSize(renderer, &w, &h);
-	return h;
+	return TFTHEIGHT;
 }
 
 void esploraTft::text(const char *str, int x, int y) {
