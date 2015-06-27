@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <unistd.h>
 
 #include <Esplora.h>
 #include "renderer.h"
@@ -8,7 +9,6 @@ using namespace RayCast;
 
 Renderer *renderer=NULL;
 
-#include <unistd.h>
 
 int main(int argc, char **argv) {
 	EsploraTFT.begin();
