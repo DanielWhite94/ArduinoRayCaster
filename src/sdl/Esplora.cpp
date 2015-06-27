@@ -73,7 +73,6 @@ void esploraTft::background(int r, int g, int b) {
 	SDL_SetRenderDrawColor(renderer, r, g, b, 0xFF);
 	SDL_Rect rect={0, 0, this->width(), this->height()};
 	SDL_RenderFillRect(renderer, &rect);
-	SDL_SetRenderDrawColor(renderer, strokeR, strokeG, strokeB, 0xFF); // Reset colour.
 
 	this->refresh();
 }
@@ -87,7 +86,6 @@ void esploraTft::stroke(int r, int g, int b) {
 	strokeR=r;
 	strokeG=g;
 	strokeB=b;
-	SDL_SetRenderDrawColor(renderer, strokeR, strokeG, strokeB, 0xFF);
 }
 
 void esploraTft::noStroke(void) {
@@ -113,6 +111,7 @@ void esploraTft::point(int x, int y) {
 	if (!strokeDo)
 		return;
 
+	SDL_SetRenderDrawColor(renderer, strokeR, strokeG, strokeB, 0xFF);
 	SDL_RenderDrawPoint(renderer, x, y);
 
 	this->refresh();
@@ -122,6 +121,7 @@ void esploraTft::line(int x1, int y1, int x2, int y2) {
 	if (!strokeDo)
 		return;
 
+	SDL_SetRenderDrawColor(renderer, strokeR, strokeG, strokeB, 0xFF);
 	SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
 
 	this->refresh();
@@ -133,11 +133,11 @@ void esploraTft::rect(int x, int y, int w, int h) {
 		SDL_SetRenderDrawColor(renderer, fillR, fillG, fillB, 0xFF);
 		SDL_Rect rect={x, y, w, h};
 		SDL_RenderFillRect(renderer, &rect);
-		SDL_SetRenderDrawColor(renderer, strokeR, strokeG, strokeB, 0xFF); // Reset colour.
 	}
 
 	// Draw outline:
 	if (strokeDo) {
+		SDL_SetRenderDrawColor(renderer, strokeR, strokeG, strokeB, 0xFF);
 		this->line(x, y, x+w, y); // Top,
 		this->line(x+w-1, y, x+w-1, y+h); // right,
 		this->line(x, y+h-1, x+w, y+h-1); // bottom and
