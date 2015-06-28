@@ -2,7 +2,7 @@
 
 namespace RayCast {
 
-	ViewPoint::ViewPoint(float X, float Y, float Angle, float Fov, float MaxDist) {
+	ViewPoint::ViewPoint(Fixed X, Fixed Y, Fixed Angle, Fixed Fov, Fixed MaxDist) {
 		x=X;
 		y=Y;
 		angle=Angle;
@@ -10,27 +10,27 @@ namespace RayCast {
 		maxDist=MaxDist;
 	}
 
-	float ViewPoint::getX(void) const {
+	Fixed ViewPoint::getX(void) const {
 		return x;
 	}
 
-	float ViewPoint::getY(void) const {
+	Fixed ViewPoint::getY(void) const {
 		return y;
 	}
 
-	float ViewPoint::getAngle(void) const {
+	Fixed ViewPoint::getAngle(void) const {
 		return angle;
 	}
 
-	float ViewPoint::getFov(void) const {
+	Fixed ViewPoint::getFov(void) const {
 		return fov;
 	}
 
-	float ViewPoint::getMaxDist(void) const {
+	Fixed ViewPoint::getMaxDist(void) const {
 		return maxDist;
 	}
 
-	void ViewPoint::setAngle(float newAngle) {
+	void ViewPoint::setAngle(Fixed newAngle) {
 		angle=newAngle;
 	}
 };

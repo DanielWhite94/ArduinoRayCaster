@@ -3,24 +3,26 @@
 
 #include <cmath>
 
+#include "fixed.h"
+
 namespace RayCast {
 
 	class ViewPoint {
 	public:
-		ViewPoint(float X, float Y, float Angle, float Fov=M_PI/3.0, float MaxDist=64.0);
+		ViewPoint(Fixed X, Fixed Y, Fixed Angle, Fixed Fov=Fixed(M_PI/3.0), Fixed MaxDist=Fixed(64.0));
 
-		float getX(void) const ; 
-		float getY(void) const ;
-		float getAngle(void) const ;
-		float getFov(void) const ;
-		float getMaxDist(void) const ;
+		Fixed getX(void) const ;
+		Fixed getY(void) const ;
+		Fixed getAngle(void) const ;
+		Fixed getFov(void) const ;
+		Fixed getMaxDist(void) const ;
 
-		void setAngle(float newAngle);
+		void setAngle(Fixed newAngle);
 	private:
-		float x, y;
-		float angle;
-		float fov; // Field-of-view, radians.
-		float maxDist; // Maximum viewing distance.
+		Fixed x, y;
+		Fixed angle;
+		Fixed fov; // Field-of-view, radians.
+		Fixed maxDist; // Maximum viewing distance.
 	};
 
 };
