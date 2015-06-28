@@ -17,11 +17,11 @@ float Fixed::max(void) const {
 	return this->rawToFloat(INT16_MAX);
 }
 
-int Fixed::getInt(void) {
+int Fixed::getInt(void) const {
 	return this->rawToInt(rawValue);
 }
 
-float Fixed::getFloat(void) {
+float Fixed::getFloat(void) const {
 	return this->rawToFloat(rawValue);
 }
 

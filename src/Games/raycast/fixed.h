@@ -19,8 +19,8 @@ public:
 	float min(void) const ;
 	float max(void) const ;
 
-	int getInt(void);
-	float getFloat(void);
+	int getInt(void) const ;
+	float getFloat(void) const ;
 
 	void set(float value);
 
