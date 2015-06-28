@@ -45,6 +45,16 @@ public:
 	static Fixed cosec(const Fixed &x);
 	static Fixed sec(const Fixed &x);
 	static Fixed cot(const Fixed &x);
+
+	friend void swap(Fixed &first, Fixed &second) {
+		using std::swap;
+		swap(first.rawValue, second.rawValue);
+	}
+
+	Fixed &operator=(Fixed other) {
+		swap(*this, other);
+		return *this;
+	}
 private:
 	int16_t rawValue;
 
