@@ -10,14 +10,14 @@ template <typename T> T clip(const T& n, const T& lower, const T& upper) {
 
 class Fixed {
 public:
-	const unsigned int BitsTotal=16;
-	const unsigned int BitsFrac=8;
+	const static unsigned int BitsTotal=16;
+	const static unsigned int BitsFrac=8;
 
 	Fixed(void);
 	Fixed(float value);
 
-	float min(void) const ;
-	float max(void) const ;
+	static float min(void);
+	static float max(void);
 
 	int getInt(void) const ;
 	float getFloat(void) const ;
@@ -58,10 +58,10 @@ public:
 private:
 	int16_t rawValue;
 
-	int16_t intToRaw(int i) const ;
-	int rawToInt(int16_t r) const ;
-	int16_t floatToRaw(float f) const ;
-	float rawToFloat(int16_t r) const ;
+	static int16_t intToRaw(int i);
+	static int rawToInt(int16_t r);
+	static int16_t floatToRaw(float f);
+	static float rawToFloat(int16_t r);
 };
 
 Fixed operator+(Fixed lhs, const Fixed &rhs);

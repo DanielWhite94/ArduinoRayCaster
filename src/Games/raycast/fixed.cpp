@@ -9,12 +9,12 @@ Fixed::Fixed(float value) {
 	set(value);
 }
 
-float Fixed::min(void) const {
-	return this->rawToFloat(INT16_MIN);
+float Fixed::min(void) {
+	return Fixed::rawToFloat(INT16_MIN);
 }
 
-float Fixed::max(void) const {
-	return this->rawToFloat(INT16_MAX);
+float Fixed::max(void) {
+	return Fixed::rawToFloat(INT16_MAX);
 }
 
 int Fixed::getInt(void) const {
@@ -110,21 +110,21 @@ Fixed Fixed::cot(const Fixed &x) {
 	return Fixed::cos(x)/Fixed::sin(x);
 }
 
-int16_t Fixed::intToRaw(int i) const {
+int16_t Fixed::intToRaw(int i){
 	return (i<<BitsFrac);
 }
 
-int Fixed::rawToInt(int16_t r) const {
+int Fixed::rawToInt(int16_t r){
 	return (r>>BitsFrac);
 }
 
-int16_t Fixed::floatToRaw(float f) const {
-	assert(f>=this->min() && f<=this->max());
-	return floorf(f*powf(2.0, (float)this->BitsFrac));
+int16_t Fixed::floatToRaw(float f) {
+	assert(f>=Fixed::min() && f<=Fixed::max());
+	return floorf(f*powf(2.0, (float)BitsFrac));
 }
 
-float Fixed::rawToFloat(int16_t r) const {
-	return r/powf(2.0, (float)this->BitsFrac);
+float Fixed::rawToFloat(int16_t r) {
+	return r/powf(2.0, (float)BitsFrac);
 }
 
 Fixed operator+(Fixed lhs, const Fixed &rhs) {
