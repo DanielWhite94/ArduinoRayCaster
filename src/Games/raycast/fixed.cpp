@@ -76,12 +76,12 @@ Fixed &Fixed::operator-=(const Fixed &rhs) {
 }
 
 Fixed &Fixed::operator*=(const Fixed &rhs) {
-	this->rawValue=(this->rawValue*rhs.rawValue)/powf(2.0, (float)BitsFrac);
+	this->rawValue=(this->rawValue*rhs.rawValue)>>BitsFrac;
 	return *this;
 }
 
 Fixed &Fixed::operator/=(const Fixed &rhs) {
-	this->rawValue=(this->rawValue*powf(2.0, (float)BitsFrac))/rhs.rawValue;
+	this->rawValue=(this->rawValue<<BitsFrac)/rhs.rawValue;
 	return *this;
 }
 
