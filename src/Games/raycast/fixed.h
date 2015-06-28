@@ -12,7 +12,7 @@ template <typename T> T clip(const T& n, const T& lower, const T& upper) {
 class Fixed {
 public:
 	const static unsigned int BitsTotal=16;
-	const static unsigned int BitsFrac=8;
+	const static unsigned int BitsFrac=7;
 
 	Fixed(void);
 	Fixed(float value);
