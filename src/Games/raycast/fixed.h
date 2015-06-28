@@ -40,6 +40,8 @@ public:
 	Fixed &operator*=(const Fixed &rhs);
 	Fixed &operator/=(const Fixed &rhs);
 
+	Fixed operator-() const ;
+
 	int floor(void) const ; // TODO: Should probably overload std::floor instead (similarly for ceil).
 	int ceil(void) const ;
 

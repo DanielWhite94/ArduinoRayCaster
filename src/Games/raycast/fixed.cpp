@@ -85,6 +85,12 @@ Fixed &Fixed::operator/=(const Fixed &rhs) {
 	return *this;
 }
 
+Fixed Fixed::operator-() const {
+	Fixed f;
+	f.setRawValue(-this->rawValue);
+	return f;
+}
+
 int Fixed::floor(void) const {
 	// TODO: Can probably do this (and ceil) much faster.
 	return floorf(getFloat());
