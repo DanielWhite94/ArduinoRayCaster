@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <iostream>
 
 template <typename T> T clip(const T& n, const T& lower, const T& upper) {
   return std::max(lower, std::min(n, upper));
@@ -55,6 +56,12 @@ public:
 		swap(*this, other);
 		return *this;
 	}
+
+	friend std::ostream& operator<< (std::ostream &out, Fixed &f) {
+		out << f.getFloat();
+		return out;
+	}
+
 private:
 	int16_t rawValue;
 
