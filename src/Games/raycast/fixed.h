@@ -36,6 +36,13 @@ public:
 	Fixed &operator*=(const Fixed &rhs);
 	Fixed &operator/=(const Fixed &rhs);
 
+
+	static Fixed sin(const Fixed &x);
+	static Fixed cos(const Fixed &x);
+	static Fixed tan(const Fixed &x);
+	static Fixed cosec(const Fixed &x);
+	static Fixed sec(const Fixed &x);
+	static Fixed cot(const Fixed &x);
 private:
 	int16_t rawValue;
 

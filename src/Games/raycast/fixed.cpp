@@ -77,6 +77,30 @@ Fixed &Fixed::operator/=(const Fixed &rhs) {
 	return *this;
 }
 
+Fixed Fixed::sin(const Fixed &x) {
+	return Fixed(sinf(x.getFloat()));
+}
+
+Fixed Fixed::cos(const Fixed &x) {
+	return Fixed(cosf(x.getFloat()));
+}
+
+Fixed Fixed::tan(const Fixed &x) {
+	return Fixed(tanf(x.getFloat()));
+}
+
+Fixed Fixed::cosec(const Fixed &x) {
+	return Fixed(1)/Fixed::sin(x);
+}
+
+Fixed Fixed::sec(const Fixed &x) {
+	return Fixed(1)/Fixed::cos(x);
+}
+
+Fixed Fixed::cot(const Fixed &x) {
+	return Fixed::cos(x)/Fixed::sin(x);
+}
+
 int16_t Fixed::intToRaw(int i) const {
 	return (i<<BitsFrac);
 }
