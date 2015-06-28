@@ -77,6 +77,15 @@ Fixed &Fixed::operator/=(const Fixed &rhs) {
 	return *this;
 }
 
+int Fixed::floor(void) const {
+	// TODO: Can probably do this (and ceil) much faster.
+	return floorf(getFloat());
+}
+
+int Fixed::ceil(void) const {
+	return ceilf(getFloat());
+}
+
 Fixed Fixed::sin(const Fixed &x) {
 	return Fixed(sinf(x.getFloat()));
 }

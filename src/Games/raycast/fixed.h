@@ -36,6 +36,8 @@ public:
 	Fixed &operator*=(const Fixed &rhs);
 	Fixed &operator/=(const Fixed &rhs);
 
+	int floor(void) const ; // TODO: Should probably overload std::floor instead (similarly for ceil).
+	int ceil(void) const ;
 
 	static Fixed sin(const Fixed &x);
 	static Fixed cos(const Fixed &x);
