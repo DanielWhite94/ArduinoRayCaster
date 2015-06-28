@@ -3,7 +3,7 @@ CPP = clang++
 CFLAGS = -Wall -std=c++11 -O2 -I../../sdl
 LFLAGS = -lSDL2 -lm -lSDL2_gfx
 
-OBJS = ../../sdl/Esplora.o main.o renderer.o viewpoint.o
+OBJS = ../../sdl/Esplora.o fixed.o main.o ray.o renderer.o viewpoint.o
 
 ALL: $(OBJS)
 	$(CPP) $(CFLAGS) $(LFLAGS) $(OBJS) -o main

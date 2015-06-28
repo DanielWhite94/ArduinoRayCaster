@@ -17,11 +17,11 @@ float Fixed::max(void) const {
 	return this->rawToFloat(INT16_MAX);
 }
 
-int Fixed::getInt(void) {
+int Fixed::getInt(void) const {
 	return this->rawToInt(rawValue);
 }
 
-float Fixed::getFloat(void) {
+float Fixed::getFloat(void) const {
 	return this->rawToFloat(rawValue);
 }
 
@@ -75,6 +75,39 @@ Fixed &Fixed::operator*=(const Fixed &rhs) {
 Fixed &Fixed::operator/=(const Fixed &rhs) {
 	this->rawValue=(this->rawValue*powf(2.0, (float)BitsFrac))/rhs.rawValue;
 	return *this;
+}
+
+int Fixed::floor(void) const {
+	// TODO: Can probably do this (and ceil) much faster.
+	return floorf(getFloat());
+}
+
+int Fixed::ceil(void) const {
+	return ceilf(getFloat());
+}
+
+Fixed Fixed::sin(const Fixed &x) {
+	return Fixed(sinf(x.getFloat()));
+}
+
+Fixed Fixed::cos(const Fixed &x) {
+	return Fixed(cosf(x.getFloat()));
+}
+
+Fixed Fixed::tan(const Fixed &x) {
+	return Fixed(tanf(x.getFloat()));
+}
+
+Fixed Fixed::cosec(const Fixed &x) {
+	return Fixed(1)/Fixed::sin(x);
+}
+
+Fixed Fixed::sec(const Fixed &x) {
+	return Fixed(1)/Fixed::cos(x);
+}
+
+Fixed Fixed::cot(const Fixed &x) {
+	return Fixed::cos(x)/Fixed::sin(x);
 }
 
 int16_t Fixed::intToRaw(int i) const {
