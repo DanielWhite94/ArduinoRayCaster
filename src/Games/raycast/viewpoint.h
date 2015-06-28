@@ -17,7 +17,12 @@ namespace RayCast {
 		Fixed getFov(void) const ;
 		Fixed getMaxDist(void) const ;
 
+		void setX(Fixed newX);
+		void setY(Fixed newY);
 		void setAngle(Fixed newAngle);
+
+		void move(Fixed delta); // Move in current direction (or backwards if delta is negative).
+		void turn(Fixed delta);
 	private:
 		Fixed x, y;
 		Fixed angle;

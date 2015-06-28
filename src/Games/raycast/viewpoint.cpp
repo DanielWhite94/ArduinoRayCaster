@@ -30,7 +30,24 @@ namespace RayCast {
 		return maxDist;
 	}
 
+	void ViewPoint::setX(Fixed newX) {
+		x=newX;
+	}
+
+	void ViewPoint::setY(Fixed newY) {
+		y=newY;
+	}
+
 	void ViewPoint::setAngle(Fixed newAngle) {
 		angle=newAngle;
+	}
+
+	void ViewPoint::move(Fixed delta) {
+		x+=Fixed::cos(angle)*delta;
+		y+=Fixed::sin(angle)*delta;
+	}
+
+	void ViewPoint::turn(Fixed delta) {
+		angle+=delta;
 	}
 };
