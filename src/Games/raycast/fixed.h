@@ -45,12 +45,19 @@ public:
 	int floor(void) const ; // TODO: Should probably overload std::floor instead (similarly for ceil).
 	int ceil(void) const ;
 
+	static Fixed abs(const Fixed &x);
+
+	static Fixed sqrt(const Fixed &x);
+
 	static Fixed sin(const Fixed &x);
 	static Fixed cos(const Fixed &x);
 	static Fixed tan(const Fixed &x);
 	static Fixed cosec(const Fixed &x);
 	static Fixed sec(const Fixed &x);
 	static Fixed cot(const Fixed &x);
+	static Fixed asin(const Fixed &x);
+	static Fixed acos(const Fixed &x);
+	static Fixed atan(const Fixed &x);
 
 	friend void swap(Fixed &first, Fixed &second) {
 		using std::swap;

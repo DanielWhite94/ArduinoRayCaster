@@ -100,6 +100,16 @@ int Fixed::ceil(void) const {
 	return ceilf(getFloat());
 }
 
+Fixed Fixed::abs(const Fixed &x) {
+	Fixed y=x;
+	y.setRawValue(std::abs(x.getRawValue()));
+	return y;
+}
+
+Fixed Fixed::sqrt(const Fixed &x) {
+	return Fixed(sqrtf(x.getFloat()));
+}
+
 Fixed Fixed::sin(const Fixed &x) {
 	return Fixed(sinf(x.getFloat()));
 }
@@ -122,6 +132,18 @@ Fixed Fixed::sec(const Fixed &x) {
 
 Fixed Fixed::cot(const Fixed &x) {
 	return Fixed::cos(x)/Fixed::sin(x);
+}
+
+Fixed Fixed::asin(const Fixed &x) {
+	return Fixed(asinf(x.getFloat()));
+}
+
+Fixed Fixed::acos(const Fixed &x) {
+	return Fixed(acosf(x.getFloat()));
+}
+
+Fixed Fixed::atan(const Fixed &x) {
+	return Fixed(atanf(x.getFloat()));
 }
 
 int16_t Fixed::intToRaw(int i){
