@@ -25,6 +25,9 @@ public:
 
 	void set(float value);
 
+	int16_t getRawValue(void) const;
+	void setRawValue(int16_t value);
+
 	bool operator==(const Fixed &rhs) const ;
 	bool operator!=(const Fixed &rhs) const ;
 	bool operator<(const Fixed &rhs) const ;

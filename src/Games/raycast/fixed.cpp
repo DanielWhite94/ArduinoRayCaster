@@ -33,6 +33,14 @@ void Fixed::set(float value) {
 	this->rawValue=this->floatToRaw(value);
 }
 
+int16_t Fixed::getRawValue(void) const {
+	return rawValue;
+}
+
+void Fixed::setRawValue(int16_t value) {
+	rawValue=value;
+}
+
 bool Fixed::operator==(const Fixed &rhs) const {
 	return (this->rawValue==rhs.rawValue);
 }
