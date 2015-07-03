@@ -1,5 +1,6 @@
 #include <cmath>
 
+#include "ray.h"
 #include "renderer.h"
 
 namespace RayCast {
@@ -10,24 +11,73 @@ namespace RayCast {
 	Renderer::~Renderer() {
 	}
 
-	void Renderer::render(const ViewPoint &vPoint) {
+	void Renderer::render(const Level &level, const ViewPoint &vPoint) {
+		// Calculate various useful values.
 		int screenW=EsploraTFT.width();
 		int screenH=EsploraTFT.height();
+		Fixed screenDist=screenW/(2*Fixed::tan(vPoint.getFov()/2));
 
 		// Clear surface.
 		EsploraTFT.background(255, 0, 255); // Clear screen (to pink, to help identify any undrawn regions).
 
 		// Draw sky and ground.
 		EsploraTFT.noStroke();
-
 		EsploraTFT.fill(0,0,255);
 		EsploraTFT.rect(0, 0, screenW, screenH/2);
-
 		EsploraTFT.fill(0,255,0);
 		EsploraTFT.rect(0, screenH/2, screenW, screenH/2);
 
 		// Draw blocks.
-		// TODO: this
+		// Loop over each vertical slice of the screen.
+		int x;
+		for(x=0;x<screenW;++x) {
+			// Trace ray from view point at this angle.
+			Fixed deltaAngle=Fixed::atan((x-screenW/2)/screenDist);
+			Fixed angle=vPoint.getAngle()+deltaAngle;
+			Ray ray(vPoint.getX(), vPoint.getY(), angle);
+
+			for(Fixed stepCount=0;stepCount<vPoint.getMaxDist();++stepCount) { // FIXME: This is just a hack (the distance is limited but not correctly).
+				// Advance ray to next (or first) intersection point.
+				ray.next();
+
+				// Get block at current ray position.
+				int mapX=ray.getMapX();
+				int mapY=ray.getMapY();
+				const Level::Block *block=level.getBlock(mapX, mapY);
+				if (block==NULL)
+					continue;
+
+				// Calculate 'true distance' and display height.
+				Fixed distance=ray.getTrueDistance();
+				int height=this->computeDisplayHeight(block->getHeight(), distance).getInt();
+				if (height>screenH) height=screenH;
+
+				// Find texture.
+				const Level::Texture *texture=level.getTexture(block->getTextureIndex());
+				if (texture==NULL)
+					continue;
+
+				// Draw texture (based on type).
+				switch(texture->type) {
+					case Level::TextureType::Colour: {
+						// Solid colour.
+						class::Colour colour=texture->data.colour;
+
+						// Adjust colour based on intersection side (horizontal or vertical).
+						// This makes edges between adjacent walls clearer.
+						int side=ray.getSide();
+						if (side) colour.mul(0.7);
+
+						// Draw vertical line.
+						EsploraTFT.stroke(colour.r, colour.g, colour.b);
+						EsploraTFT.line(x, (screenH-height)/2, x, (screenH+height)/2);
+					} break;
+				}
+
+				// Move onto next ray.
+				break;
+			}
+		}
 
 		// Draw objects.
 		// TODO: this
@@ -90,5 +140,9 @@ namespace RayCast {
 		#undef SY
 	}
 #endif
+
+	Fixed Renderer::computeDisplayHeight(const Fixed &blockHeight, const Fixed &distance) {
+		return (distance>0 ? blockHeight/distance : Fixed::max());
+	}
 
 };
