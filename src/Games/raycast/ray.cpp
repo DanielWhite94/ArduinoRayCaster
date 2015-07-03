@@ -60,9 +60,9 @@ namespace RayCast {
 	Fixed Ray::getTrueDistance(void) const {
 		Fixed distance;
 		if (side==0)
-			distance=Fixed::abs((mapX-startX+(1-stepX)/2)/rayDirX);
+			distance=(rayDirX!=0 ? Fixed::abs((mapX-startX+(1-stepX)/2)/rayDirX) : Fixed::max());
 		else
-			distance=Fixed::abs((mapY-startY+(1-stepY)/2)/rayDirY);
+			distance=(rayDirY!=0 ? Fixed::abs((mapY-startY+(1-stepY)/2)/rayDirY) : Fixed::max());
 		return distance;
 	}
 
