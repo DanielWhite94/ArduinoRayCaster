@@ -20,7 +20,13 @@ namespace RayCast {
 #endif
 
 	private:
+		const Fixed blockBaseHeight=64;
+		Colour colourBg, colourGround, colourSky;
+
 		static Fixed computeDisplayHeight(const Fixed &blockHeight, const Fixed &distance);
+
+		Fixed colourDistanceFactor(Fixed distance) const ;
+		void colourAdjustForDistance(Colour &colour, Fixed distance) const ;
 	};
 };
 

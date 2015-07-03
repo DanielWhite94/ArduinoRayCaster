@@ -6,6 +6,10 @@
 namespace RayCast {
 
 	Renderer::Renderer() {
+
+		colourBg.r=255; colourBg.g=0; colourBg.b=255; // Pink (to help identify any undrawn regions).
+		colourGround.r=0; colourGround.g=255; colourGround.b=0; // Green.
+		colourSky.r=0; colourSky.g=0; colourSky.b=255; // Blue.
 	}
 
 	Renderer::~Renderer() {
@@ -18,14 +22,27 @@ namespace RayCast {
 		Fixed screenDist=screenW/(2*Fixed::tan(vPoint.getFov()/2));
 
 		// Clear surface.
-		EsploraTFT.background(255, 0, 255); // Clear screen (to pink, to help identify any undrawn regions).
+		EsploraTFT.background(colourBg.r, colourBg.g, colourBg.b);
 
 		// Draw sky and ground.
-		EsploraTFT.noStroke();
-		EsploraTFT.fill(0,0,255);
-		EsploraTFT.rect(0, 0, screenW, screenH/2);
-		EsploraTFT.fill(0,255,0);
-		EsploraTFT.rect(0, screenH/2, screenW, screenH/2);
+		int y;
+		for(y=0;y<screenH/2;++y) {
+			// Calculate distance in order to adjust colour.
+			Fixed distance=blockBaseHeight/(screenH-2*y);
+			Colour colour;
+
+			// Sky.
+			colour=colourSky;
+			colourAdjustForDistance(colour, distance);
+			EsploraTFT.stroke(colour.r, colour.g, colour.b);
+			EsploraTFT.line(0, y, screenW, y);
+
+			// Ground.
+			colour=colourGround;
+			colourAdjustForDistance(colour, distance);
+			EsploraTFT.stroke(colour.r, colour.g, colour.b);
+			EsploraTFT.line(0, screenH-1-y, screenW, screenH-1-y);
+		}
 
 		// Draw blocks.
 		// Loop over each vertical slice of the screen.
@@ -59,6 +76,9 @@ namespace RayCast {
 
 				// Draw texture (based on type).
 				switch(texture->type) {
+					case Level::TextureType::None:
+						continue;
+					break;
 					case Level::TextureType::Colour: {
 						// Solid colour.
 						class::Colour colour=texture->data.colour;
@@ -67,6 +87,9 @@ namespace RayCast {
 						// This makes edges between adjacent walls clearer.
 						int side=ray.getSide();
 						if (side) colour.mul(0.7);
+
+						// Adjust colour for distance.
+						colourAdjustForDistance(colour, distance);
 
 						// Draw vertical line.
 						EsploraTFT.stroke(colour.r, colour.g, colour.b);
@@ -145,4 +168,11 @@ namespace RayCast {
 		return (distance>0 ? blockHeight/distance : Fixed::max());
 	}
 
+	Fixed Renderer::colourDistanceFactor(Fixed distance) const {
+		return (distance>=1 ? 1/Fixed::sqrt(distance) : 1);
+	}
+
+	void Renderer::colourAdjustForDistance(Colour &colour, Fixed distance) const {
+		colour.mul(colourDistanceFactor(distance));
+	}
 };

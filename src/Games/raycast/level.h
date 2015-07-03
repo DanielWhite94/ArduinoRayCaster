@@ -12,6 +12,7 @@ public:
 
 	// Internal data structures
 	enum TextureType {
+		None,
 		Colour,
 	};
 
