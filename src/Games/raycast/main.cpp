@@ -2,13 +2,14 @@
 #include <unistd.h>
 
 #include <Esplora.h>
+
+#include "level.h"
 #include "renderer.h"
 #include "viewpoint.h"
 
 using namespace RayCast;
 
 Renderer *renderer=NULL;
-
 
 int main(int argc, char **argv) {
 	EsploraTFT.begin();
@@ -18,6 +19,7 @@ int main(int argc, char **argv) {
 	const Fixed turnSpeed=Fixed(M_PI/18.0);
 
 	ViewPoint vPoint(Fixed(13.4), Fixed(8.0), Fixed(M_PI));
+	Level level; // TODO: Actually load a level.
 
 	while(1) {
 		// Check events.
@@ -31,7 +33,8 @@ int main(int argc, char **argv) {
 			vPoint.move(-moveSpeed);
 
 		// Redraw.
-		renderer->render(vPoint);
+		renderer->render(level, vPoint);
+		//renderer->renderTopDown(vPoint);
 #if SDL_MAJOR_VERSION == 2
 		EsploraTFT.tick();
 #endif

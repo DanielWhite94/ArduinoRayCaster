@@ -2,6 +2,8 @@
 #define RAYCAST_RENDERER_H
 
 #include <Esplora.h>
+
+#include "level.h"
 #include "viewpoint.h"
 
 namespace RayCast {
@@ -11,13 +13,20 @@ namespace RayCast {
 		Renderer();
 		~Renderer();
 
-		void render(const ViewPoint &vPoint);
+		void render(const Level &level, const ViewPoint &vPoint);
 
 #ifdef EXTRA
 		void renderTopDown(const ViewPoint &vPoint);
 #endif
 
 	private:
+		const Fixed blockBaseHeight=64;
+		Colour colourBg, colourGround, colourSky;
+
+		static Fixed computeDisplayHeight(const Fixed &blockHeight, const Fixed &distance);
+
+		Fixed colourDistanceFactor(Fixed distance) const ;
+		void colourAdjustForDistance(Colour &colour, Fixed distance) const ;
 	};
 };
 

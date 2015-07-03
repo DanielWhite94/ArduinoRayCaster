@@ -85,6 +85,28 @@ Fixed &Fixed::operator/=(const Fixed &rhs) {
 	return *this;
 }
 
+Fixed &Fixed::operator++() {
+	rawValue+=(1<<BitsFrac);
+	return *this;
+}
+
+Fixed Fixed::operator++(int) {
+	Fixed tmp(*this);
+	operator++();
+	return tmp;
+}
+
+Fixed &Fixed::operator--() {
+	rawValue-=(1<<BitsFrac);
+	return *this;
+}
+
+Fixed Fixed::operator--(int) {
+	Fixed tmp(*this);
+	operator--();
+	return tmp;
+}
+
 Fixed Fixed::operator-() const {
 	Fixed f;
 	f.setRawValue(-this->rawValue);
