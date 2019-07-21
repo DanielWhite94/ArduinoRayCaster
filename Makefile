@@ -1,4 +1,4 @@
-all: raycast 
+all: raycast
 
 
 raycast: force_check
